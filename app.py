@@ -62,6 +62,8 @@ load_dotenv()
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 app = Flask(__name__)
+with open('fake_news_model.pkl', 'rb') as f:
+    fake_news_model = pickle.load(f)
 app.secret_key = "your_secret_key"
 
 generation_config = {
@@ -101,7 +103,7 @@ def scrape_url_content(url):
     except Exception as e:
         return f"Error scraping URL: {str(e)}"
 
-def train_model():
+""" def train_model():
     # Load the datasets
     fake_data = pd.read_csv('Fake.csv')
     true_data = pd.read_csv('True.csv')
@@ -145,7 +147,8 @@ def train_model():
     print("Classification Report:")
     print(classification_report(y_test, y_pred))
     
-train_model()
+#train_model()
+""" 
 
 def login_required(f):
     @wraps(f)
@@ -225,15 +228,6 @@ def contact():
 @app.route('/websites')
 def websites():
     return render_template('websites.html')
-
-def clean_gemini_response(response_text):
-    
-    response_text = re.sub(r'\*+', '', response_text) 
-    response_text = re.sub(r'\s+', ' ', response_text)  
-    response_text = response_text.strip()  
-    return response_text
-
-
 @app.route('/check_credibility', methods=['POST'])
 def check_credibility():
     user_input = request.form['data']
