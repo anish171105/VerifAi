@@ -356,5 +356,5 @@ def image():
     return render_template("image.html", text=extracted_text)
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000)
 
