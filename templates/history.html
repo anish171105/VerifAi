@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credibility Check History</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 30px;
+            margin: 0;
+        }
+
+        /* Heading Style */
+        .heading {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Table Container */
+        .table-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        thead {
+            background: #667eea;
+            color: white;
+        }
+
+        thead th {
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: #f1f1f1;
+        }
+
+        tbody td {
+            padding: 12px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .table-container {
+                padding: 15px;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                display: flex;
+                flex-direction: column;
+                padding: 15px;
+                border-bottom: 2px solid #eee;
+            }
+
+            tbody td {
+                padding: 10px;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2 class="heading">Your Credibility Check History</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Input Text</th>
+                    <th>Result</th>
+                    <th>Confidence</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                <tr>
+                    <td>{{ entry['input_text'] }}</td>
+                    <td>{{ entry['result'] }}</td>
+                    <td>{{ entry['probability'] }}%</td>
+                    <td>{{ entry['timestamp'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

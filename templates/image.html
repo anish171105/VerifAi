@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR & Credibility Check</title>
+    <style>
+        
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffff;
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-size: 1em;
+            color: #333;
+        }
+
+        button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        .quote-section {
+            font-size: 1.6em;
+            color: #9199a2;
+            font-style: italic;
+            margin-bottom: 30px;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        .result-box {
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .true-box {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .fake-box {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .probability-box {
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+        }
+        .how-to-use {
+    margin-top: 50px;
+    padding: 50px;
+    border-radius: 20px;
+    background: #ffffff; 
+    font-family: 'Roboto', sans-serif; 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    max-width: 1300px; 
+    animation: fadeIn 0.6s ease;
+    border: 1px solid #e0e0e0; 
+    text-align: left; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.how-to-use h3 {
+    font-size: 1.5rem; 
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #333;
+    font-family: 'Roboto', sans-serif; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #26d5f0; 
+    padding-bottom: 10px;
+}
+
+.how-to-use p {
+    font-size: 1.125rem; 
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.how-to-use ul {
+    padding-left: 30px;
+    list-style: none;
+    font-size: 1rem;
+    margin-bottom: 30px; 
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.how-to-use ul li {
+    background: url('https://img.icons8.com/ios-filled/50/000000/checkmark.png') no-repeat left center;
+    background-size: 20px;
+    padding-left: 35px; 
+    margin-bottom: 20px; 
+    color: #666;
+    line-height: 1.8;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.how-to-use ul li:hover {
+    color: #61dafb; 
+    background-color: #f7f7f7; 
+}
+
+.how-to-use ul li::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #61dafb; 
+    margin-right: 15px; 
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.how-to-use ul li:hover::before {
+    transform: scale(1.2);
+}
+
+.how-to-use .button-wrapper {
+    margin-top: 35px;
+}
+
+.how-to-use .cta-button {
+    padding: 14px 35px;
+    background: #61dafb;
+    color: #fff;
+    font-size: 1.125rem; 
+    font-weight: 600;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); 
+    font-family: 'Roboto', sans-serif; 
+}
+
+.how-to-use .cta-button:hover {
+    background: #45a9d9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); 
+}
+footer {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer i {
+    margin-right: 5px;
+}
+
+    </style>
+</head>
+<body>
+
+    <h1> Text Extraction & Credibility Check</h1>
+
+    <div class="container">
+        <!-- Quote Section -->
+        <div class="quote-section">
+            <p>Extracting text from an image converts visual content into actionable data, <br>contributing to the advancement of our collective knowledge base.</p>
+        </div>
+
+        <!-- Left Section: Image Upload and Credibility Form -->
+        <div class="section">
+            <h2>Upload an Image to Extract Text</h2>
+            <p>Upload an image, and the system will extract the text for you. Then, you can analyze its credibility.</p>
+            <form action="/image" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="file" required>
+                </div>
+                <button type="submit"> Extract Text</button>
+            </form>
+        </div>
+
+        <!-- Right Section: Credibility Check -->
+        <div class="section">
+            <h2>Credibilty check</h2>
+            <p>your extracted text from image</p>
+            <form action="/check_credibility" method="POST">
+                <div class="form-group">
+                    <input type="text" id="data" name="data" placeholder="extracted text from image " required value="{{ text or '' }}">
+                </div>
+                <button type="submit">Analyze Credibility</button>
+            </form>
+        </div>
+    </div>
+
+    {% if user_input %}
+    <div class="container">
+        <div class="result-box">
+            <h2>Results:</h2>
+
+            <!-- Image Display -->
+            <div class="image-container">
+                <img src="{{ uploaded_image_url }}" alt="Uploaded Image" width="100%">
+            </div>
+
+            <!-- Extracted Text -->
+            <div class="result-box">
+                <p><strong>Extracted Text:</strong> {{ extracted_text }}</p>
+            </div>
+
+            <!-- News Prediction -->
+            <div class="result-box {{ 'true-box' if news_result == 'True' else 'fake-box' }}">
+                <p><strong>News Prediction:</strong> {{ news_result }}</p>
+            </div>
+
+            <!-- Probability -->
+            <div class="probability-box">
+                <p><strong>Prediction Probability:</strong> {{ probability }}%</p>
+            </div>
+
+            <!-- Credibility Response -->
+            <div class="result-box">
+                <p><strong>Credibility Response:</strong> {{ response }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="how-to-use">
+        <h3>Instructions for Text Extraction & Credibility Check</h3>
+        <p><strong>What is Text Extraction?</strong></p>
+        <p>Text extraction is the process of retrieving meaningful text from various sources, such as images, documents, or web pages.</p>
+        <h4>Steps to Use the Website:</h4>
+        <ul>
+            <li><strong>Upload Image:</strong> Click the "Upload" button to choose the image from which you want to extract text.</li>
+            <li><strong>Get Extracted Text:</strong> The system will automatically extract the text from the uploaded image.</li>
+            <li><strong>Analyze Text:</strong> Enter the extracted text into the provided input field to analyze its credibility.</li>
+            <li><strong>View Results:</strong> Check the results section for a detailed breakdown, including the credibility response and probability score.</li>
+        </ul>
+        <p>Use the tool to analyze additional inputs as needed.</p>
+    </div>
+    <footer>
+        <p>&copy; 2025 Credibility Check | <strong></strong> <i class="fas fa-globe"></i></p>
+    </footer>
+    
+</body>
+</html>

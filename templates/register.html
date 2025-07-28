@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Secure Access</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+/* Header Styling */
+.header-container {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px; /* Adjust size as needed */
+    margin-right: 10px; /* Add space between logo and text */
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+    color: black;
+}
+
+        /* Main Container */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+            height: 90vh;
+            margin-top: 80px; /* Adjusted for header spacing */
+        }
+
+        /* Left Side */
+        .left-side {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .left-side h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, blue, rgb(255, 59, 92)); 
+    color: transparent;
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    text-align: left;
+    position: relative;
+    top: 8px;
+    left: 20px;
+}
+
+
+        /* Right Side (Register Form) */
+        .right-side {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            background-color: #e3e3e7;
+            padding: 30px;
+            box-shadow: rgba(188, 186, 186, 0.1) 0px 10px 30px;
+            border-radius: 10px;
+        }
+
+        /* Register Box */
+        .register-container {
+            width: 100%;
+            max-width: 350px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        /* Input Fields */
+        .register-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .register-container input:focus {
+            border: 1px solid #667eea;
+        }
+
+        /* Register Button */
+        .register-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #000000;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .register-container button:hover {
+            background: #5a67d8;
+        }
+
+        /* Login Link */
+        .register-container .login-link {
+            margin-top: 15px;
+            display: block;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .register-container .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left-side, .right-side {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/7191/7191610.png" alt="Logo"> <!-- Replace with actual logo path -->
+                <h1>Credibility checker</h1>
+            </div>
+            <nav>
+                <!-- Add navigation links here -->
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-side">
+            <h1>Create<br>an account<br>and get started!</h1>
+        </div>
+
+        <!-- Right Section (Register Form) -->
+        <div class="right-side">
+            <div class="register-container">
+                <h2>Register</h2>
+                <form method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="{{ url_for('login') }}" class="login-link">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

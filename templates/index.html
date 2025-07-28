@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Credibility Check</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        header {
+            width: 100%;
+            background-color: #101010;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        
+        header {
+            width: 100%;
+            background-color: #101010;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li {
+            display: inline-block;
+        }
+
+        .navbar ul li a {
+            color: #e1e1e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1300px;
+            margin-top: 100px; 
+            padding: 30px;
+            gap: 20px;
+        }
+
+        
+        .left-content {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100%;
+        }
+
+        .heading {
+    font-size: 4.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, rgb(2, 2, 250), rgb(227, 106, 7)); 
+    background-size: 200% 200%;
+    color: transparent;
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    text-align: left;
+    position: relative;
+    top: 70px;
+    left: 135px;
+    animation: gradientAnimation 3s infinite linear;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.heading:hover {
+    color: red; 
+    -webkit-text-fill-color: rgb(0, 0, 0); 
+    background: none; 
+    background-clip: unset; 
+}
+
+
+        
+        .right-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .prompt-text {
+            font-size: 2.1rem;
+            font-weight: 700; 
+            color: #000000;
+            margin-bottom: 20px; 
+            padding-top: 5px; 
+            font-family: 'Tahoma ';
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 50px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #61dafb;
+            box-shadow: 0 0 8px rgba(97, 218, 251, 0.6);
+        }
+
+        button {
+    background: #000000; 
+    color: #fff; 
+    border: none;
+    padding: 14px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(6, 64, 97, 0.4);
+}
+
+
+        .result {
+    text-align: center;
+    padding: 40px; 
+    max-width: 90%; 
+    margin: 30px auto; 
+    border-radius: 20px; 
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff; 
+    border: 1px solid #ccc; 
+}
+
+.result h2 {
+    font-size: 2rem; 
+    font-weight: 700;
+    color: #222; 
+    margin-bottom: 30px; 
+    letter-spacing: 0.6px;
+    text-transform: uppercase; 
+}
+
+
+.result h3 {
+    font-size: 2.2rem; 
+    font-weight: 600;
+    color: #444;
+    margin: 25px 0; 
+    line-height: 1.8; 
+}
+
+
+.content-box {
+    padding: 30px;
+    background-color: #f7f7f7; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 12px;
+    margin: 30px 0; 
+    font-size: 1.6rem; 
+    color: #555;
+    text-align: left; 
+    line-height: 1.8;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+}
+
+
+.true-box {
+    background: #e6f9e6; 
+    border: 2px solid #28a745; 
+    color: #256d27; 
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0; 
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.fake-box {
+    background: #fde8e8; 
+    border: 2px solid #dc3545; 
+    color: #842029; 
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0; 
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.true-box:hover,
+.fake-box:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); 
+}
+
+
+@media (max-width: 768px) {
+    .result {
+        padding: 20px;
+        max-width: 100%; 
+    }
+
+    .result h2 {
+        font-size: 2.2rem; 
+    }
+
+    .result h3 {
+        font-size: 1.8rem; 
+        margin: 20px 0; 
+    }
+
+    .content-box,
+    .true-box,
+    .fake-box {
+        font-size: 1.4rem; 
+        padding: 20px; 
+    }
+}
+
+.how-to-use {
+    margin-top: 50px;
+    padding: 50px;
+    border-radius: 20px;
+    background: #ffffff; 
+    font-family: 'Roboto', sans-serif; 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    max-width: 1300px; 
+    animation: fadeIn 0.6s ease;
+    border: 1px solid #e0e0e0; 
+    text-align: left; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.how-to-use h3 {
+    font-size: 1.5rem; 
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #333;
+    font-family: 'Roboto', sans-serif; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #61dafb; 
+    padding-bottom: 10px;
+}
+
+.how-to-use p {
+    font-size: 1.125rem; 
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.how-to-use ul {
+    padding-left: 30px;
+    list-style: none;
+    font-size: 1rem;
+    margin-bottom: 30px; 
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.how-to-use ul li {
+    background: url('https://img.icons8.com/ios-filled/50/000000/checkmark.png') no-repeat left center;
+    background-size: 20px;
+    padding-left: 35px; 
+    margin-bottom: 20px; 
+    color: #666;
+    line-height: 1.8;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.how-to-use ul li:hover {
+    color: #61dafb; 
+    background-color: #f7f7f7; 
+}
+
+.how-to-use ul li::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #61dafb; 
+    margin-right: 15px; 
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.how-to-use ul li:hover::before {
+    transform: scale(1.2);
+}
+
+.how-to-use .button-wrapper {
+    margin-top: 35px;
+}
+
+.how-to-use .cta-button {
+    padding: 14px 35px;
+    background: #61dafb;
+    color: #fff;
+    font-size: 1.125rem; 
+    font-weight: 600;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); 
+    font-family: 'Roboto', sans-serif; 
+}
+
+.how-to-use .cta-button:hover {
+    background: #45a9d9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); 
+}
+footer {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer i {
+    margin-right: 5px;
+}
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .heading {
+                font-size: 2.5rem;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            form {
+                padding: 20px;
+                width: 100%;
+            }
+
+            input[type="text"] {
+                height: 50px;
+            }
+
+            button {
+                font-size: 0.9rem;
+            }
+
+            .result h2 {
+                font-size: 1.6rem;
+            }
+
+            .result p {
+                font-size: 1rem;
+            }
+            
+        }
+        .probability-box {
+    background-color: #f9f9f9; 
+    padding: 15px; 
+    border: 2px solid #ddd; 
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    color: #333; 
+    margin: 30px 0; 
+    text-align: center; 
+    width:80%; 
+    max-width: 600px; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.probability-box h2 {
+    font-size: 1.2rem; 
+    color: #ff6347; 
+    margin-bottom: 15px;
+}
+
+.probability-box p {
+    font-size: 1rem; 
+    color: #555; 
+    margin: 10px 0;
+}
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <nav class="navbar">
+            <ul>
+                <li><a href="/websites">Trusted Sources</a></li>
+                <li><a href="/image">image to text</a></li>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="/history">History</a></li>
+                        {% if session.username %}
+                        <li><a href="/contact">About us</a></li>
+                            <li><a href="/logout">Logout - {{ session.username }}</a></li>
+                        {% else %}
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="left-content">
+        <h1 class="heading">Credibility<br> Check<br></h1>
+    </div>
+        
+    <div class="right-content">
+        <form action="/check_credibility" method="POST">
+            <p class="prompt-text">What can I check today?</p>
+            <div class="form-group">
+                <input type="text" id="data" name="data" placeholder="Enter the text or URL" required>
+            </div>
+            <button type="submit">Tell me if its true!</button>
+        </form>
+    </div>
+</div>
+
+{% if user_input %}
+<div class="result">
+    <h2>Results for Your Input:</h2>
+    <div class="box">
+        <p><strong>Input:</strong> {{ user_input }}</p>
+    </div>
+    <!-- Add dynamic class based on "news_result" value -->
+    <div class="box {{ 'true-box' if news_result == 'True' else 'fake-box' }}">
+        <p><strong>News Prediction:</strong> {{ news_result }}</p>
+    </div>
+    <div class="probability-box">
+        <h2>Prediction Probability</h2>
+          <p><strong>Probability:</strong> {{ probability }}%</p>
+    </div>
+    <div class="box">
+        <p><strong>Credibility Response:</strong> {{ response }}</p>
+    </div>
+   
+</div>
+
+{% endif %}
+
+<div class="how-to-use">
+    <h3>Instructions for Using the Credibility Check Website</h3>
+    <p><strong>What is Credibility Check?</strong></p>
+    <p>The Credibility Check Website helps you verify the authenticity of news articles, URLs, or text by analyzing the input and predicting its reliability.</p>
+    <h4>Steps to Use the Website:</h4>
+    <ul>
+        <li><strong>Access the Website:</strong> Open your web browser and navigate to the Credibility Check Website.</li>
+        <li><strong>Provide Your Input:</strong> Enter the text or URL you want to check in the provided input field.</li>
+        <li><strong>Submit the Data:</strong> Click "Submit" to analyze the input.</li>
+        <li><strong>View Results:</strong> Check the results section for a detailed breakdown, including credibility response and probability score.</li>
+    </ul>
+    <p>Use the tool to analyze additional inputs as needed.</p>
+</div>
+<footer>
+    <p>&copy; 2025 Credibility Check | <strong></strong> <i class="fas fa-globe"></i></p>
+</footer>
+</body>
+</html>

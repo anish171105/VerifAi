@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Secure Access</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+/* Header Styling */
+.header-container {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px; /* Adjust size as needed */
+    margin-right: 10px; /* Add space between logo and text */
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+    color: black;
+}
+
+
+    .navbar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo h1 {
+        margin: 0;
+        color: #333;
+        font-size: 24px;
+    }
+        /* Section for left and right content */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+            height: 90vh;
+            margin: 0 auto;
+        }
+
+        /* Left side text styling */
+        .left-side {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+            border-radius: 10px;
+        }
+
+        .left-side h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, blue, rgb(255, 59, 92)); 
+    color: transparent;
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    text-align: left;
+    position: relative;
+    top: 15px;
+    left: 15px;
+}
+
+        /* Right side login box styling */
+        .right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background-color: #e3e3e7; /* Change to light grey */
+    padding: 30px;
+    box-shadow: rgba(60, 60, 60, 0.1) 0px 10px 30px;
+    border-radius: 10px;
+}
+
+/* Login box container */
+.login-container {
+    width: 100%;
+    max-width: 350px;
+    padding: 30px;
+    background: #ffffff; /* Change to a darker grey for the login box */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        /* Input fields styling */
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        /* Focus effect on input fields */
+        .login-container input:focus {
+            border: 1px solid #000000;
+        }
+
+        /* Login button styling */
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #000000;
+            color: #fff;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        /* Button hover effect */
+        .login-container button:hover {
+            background: #5a67d8;
+        }
+
+        /* Registration link styling */
+        .login-container .register-link {
+            margin-top: 15px;
+            display: block;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Hover effect on the registration link */
+        .login-container .register-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-side, .right-side {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<div class="header-container">
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/7191/7191610.png" alt="Logo"> <!-- Replace with actual logo path -->
+            <h1>Credibility checker</h1>
+        </div>
+        <nav>
+            <!-- Add navigation links here -->
+        </nav>
+    </div>
+</div>
+
+<body>
+    <div class="container">
+        <!-- Left Side Section -->
+        <div class="left-side">
+            <h1>Trust begins<br>with<br>verification</h1>
+        </div>
+
+        <!-- Right Side Section (Login Form) -->
+        <div class="right-side">
+            <div class="login-container">
+                <h2>Login</h2>
+                <form method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="{{ url_for('register') }}" class="register-link">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
