@@ -40,7 +40,6 @@ gunicorn
 pandas
 Flask
 scikit-learn
-sklearn
 matplotlib
 requests
 pillow
