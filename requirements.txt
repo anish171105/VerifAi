@@ -40,6 +40,7 @@ gunicorn
 pandas
 Flask
 scikit-learn
+sklearn
 matplotlib
 requests
 pillow
@@ -48,3 +49,4 @@ python-dotenv
 newspaper3k
 opencv-python
 werkzeug
+lxml_html_clean
